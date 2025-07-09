@@ -4,14 +4,18 @@ import streamlit as st
 st.set_page_config(page_title="NL2SQL with Google Generative AI")
 
 # ✅ Other imports
+'''
 from dotenv import load_dotenv
 from pathlib import Path
+'''
 import os
+
 import sqlite3
 import google.generativeai as genai
 import time
 from datetime import datetime, timedelta
 
+'''
 # ✅ Load .env
 dotenv_path = Path(__file__).parent / ".env"
 load_dotenv(dotenv_path, override=True)
@@ -22,7 +26,12 @@ if not API_KEY:
     st.error("API key not found. Please add it to your .env file as GOOGLE_API_KEY.")
     st.stop()
 
+    '''
+
+# ✅ Load API key from Streamlit secrets
+API_KEY = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=API_KEY)
+
 
 # ✅ Initialize session state for rate limiting
 if 'last_request_time' not in st.session_state:
